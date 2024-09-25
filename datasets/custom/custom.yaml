@@ -1,0 +1,9 @@
+path: ./custom
+train: ./train
+val: ./val
+test: ./test
+
+names:
+  0: icon
+  1: text
+  2: text input
