@@ -1,23 +1,55 @@
+import argparse
 from ultralytics import YOLO
+import os
 
-# Load a model
-model = YOLO("yolov10n.yaml")  # build a new model from YAML
-model = YOLO("yolov10n.pt")  # load a pretrained model (recommended for training)
-model = YOLO("yolov10n.yaml").load("yolov10n.pt")  # build from YAML and transfer weights
 
-# Train the model
-results = model.train(data="datasets/custom/custom.yaml", epochs=256, imgsz=640)
+def main(mode):
+    if mode == 'train':
+        print("Training the model...")
 
-#model = YOLO("runs/detect/train66/weights/best.pt")  # load a pretrained model (recommended for training)
-#results = model.predict(['image1.jpg', 'image2.jpg', 'image3.png', 'image4.jpg', 'image5.jpg'])
-#for i, result in enumerate(results):
-#    print(result.boxes)
-#
-#    # Annotate
-#    im = result.plot()
-#
-#    # Generate unique filenames like result1.jpg, result2.jpg, etc.
-#    filename = f"result{i+1}.jpg"
-#    
-#    # Save each result to a different file
-#    result.save(filename=filename, conf=False)
+        # Load a model
+        model = YOLO("yolov10n.yaml")  # build a new model from YAML
+        model = YOLO("yolov10n.pt")  # load a pretrained model (recommended for training)
+        model = YOLO("yolov10n.yaml").load("yolov10n.pt")  # build from YAML and transfer weights
+
+        # Train the model
+        results = model.train(data="datasets/custom/custom.yaml", epochs=256, imgsz=640)
+
+    elif mode == 'test':
+        print("Testing the model...")
+
+        model = YOLO("runs/detect/train66/weights/best.pt")  # load a pretrained model (recommended for training)
+        directory_path = 'evaluation_images'
+
+        images = [f"{directory_path}/{filename}" for filename in os.listdir(directory_path) if os.path.isfile(os.path.join(directory_path, filename))]
+        results = model.predict(images)
+
+        for i, result in enumerate(results):
+            print(result.path)
+            print(result.boxes)
+
+            #im = result.plot()
+            #filename = f"result{i+1}.jpg"
+            #result.save(filename=filename, conf=False)
+    else:
+        print("Invalid mode. Please choose 'train' or 'test'.")
+
+if __name__ == "__main__":
+    # Create an argument parser
+    parser = argparse.ArgumentParser(description="Train or test the model.")
+    
+    # Add the mode argument
+    parser.add_argument('mode', choices=['train', 'test'], 
+                        help="Choose 'train' to train the model or 'test' to test the model.")
+    
+    # Parse the arguments
+    args = parser.parse_args()
+    
+    # Call the main function with the specified mode
+    main(args.mode)
+
+
+
+
+
+
