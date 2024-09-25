@@ -42,6 +42,7 @@
             pip install ultralytics
             #pip uninstall opencv-python
             #pip install opencv-python-headless
+            pip install label-studio
 
             echo "Python environment with C libraries and pip packages loaded!"
           '';
