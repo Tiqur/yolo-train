@@ -14,26 +14,10 @@ def main(mode):
 
         results = model.train(
             data="datasets/custom/custom.yaml", 
-            epochs=1000, 
-            imgsz=640, 
-            cache=True,
-            hsv_h=0.015,        # Introduces hue variability for different lighting conditions
-            hsv_s=0.7,          # Adjusts saturation to handle different color intensities
-            hsv_v=0.4,          # Modifies brightness for varying lighting conditions
-            degrees=5.0,        # Small rotation to recognize objects at slightly different angles
-            translate=0.1,      # Translate images slightly to simulate partial views
-            scale=0.5,          # Scales objects to simulate different distances
-            shear=2.0,          # Small shearing to simulate slight perspective distortions
-            perspective=0.0005, # Minor perspective change for 3D understanding
-            flipud=0.0,         # No vertical flip, as it’s not typically useful for UI elements
-            fliplr=0.5,         # Horizontal flip to learn from symmetrical layouts
-            bgr=0.0,            # No BGR flip since RGB is standard for UI screenshots
-            mosaic=1.0,         # Combines four images into one, very effective for complex scenes
-            mixup=0.1,          # Small mixup to introduce variability without overwhelming the model
-            copy_paste=0.0,     # No copy-paste, as it’s less applicable to UI screenshots
-            auto_augment='randaugment', # Automatically applies diverse augmentations
-            erasing=0.4,        # Erases portions to make the model focus on critical features
-            crop_fraction=1.0   # Full image cropping for standard object detection
+            epochs=200, 
+            imgsz=1280, 
+            #cache='disk',
+            batch=8
         )
 
     elif mode == 'test':
