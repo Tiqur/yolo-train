@@ -13,9 +13,9 @@ def main(mode):
         model = YOLO("yolov10n.yaml").load("yolov10n.pt")  # build from YAML and transfer weights
 
         results = model.train(
-            data="datasets/custom/custom.yaml", 
+            data="datasets/rico_small/rico_small.yaml", 
             epochs=200, 
-            imgsz=1280, 
+            imgsz=640, 
             #cache='disk',
             batch=8
         )

@@ -1,0 +1,32 @@
+path: ./rico_small
+train: ./train
+val: ./val
+test: ./test
+
+names:
+  0: Text
+  1: Text Button
+  2: Input
+  3: Image
+  4: Toolbar
+  5: Icon
+  6: Multi-Tab
+  7: List Item
+  8: Radio Button
+  9: Background Image
+  10: Slider
+  11: Advertisement
+  12: Web View
+  13: Drawer
+  14: Modal
+  15: Button Bar
+  16: Card
+  17: Checkbox
+  18: Pager Indicator
+  19: Number Stepper
+  20: Map View
+  21: On/Off Switch
+  22: Bottom Navigation
+  23: Date Picker
+  24: Video
+
